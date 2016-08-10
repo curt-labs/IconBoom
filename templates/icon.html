@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>IconMedia</title>
+	</head>
+	<body>
+		<h3>{{.v}}</h3>
+		<div>
+			<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+			<script src="https://www.iconfigurators.com/pop/src/iconfig-ar-2.cfm?key=539D7C9D0B8B72F4966C"></script>
+			<div id="ic-vehicle-wrapper" data-vehicleid="{{.v}}" data-part="" title="Vehicle Configurator"></div>
+		</div>
+		<div id="error"></div>
+		<div id="success"></div>
+	</body>
+
+	<script type="text/javascript">
+		var checkerr = function(){
+			window.onerror = function(msg, src, line, col, err) {
+				jQuery("#error").text("OH NO");
+				return true;
+			}
+			jQuery("#error").text("YES");
+			return false;
+		};
+
+		var logSuccess = function() {
+			jQuery('#error').text('');
+		}; 
+
+		var logError = function() {
+			jQuery('#success').text('');
+		};
+
+		window.onload = function() {
+			window.onerror = function(msg, src, line, col, err) {
+				jQuery("#error").text(msg);
+			}
+			jQuery("#error").text("YES");
+			// jQuery.when(checkerr()).then(function(res){
+			// 	console.log(res);
+			// 	if (!res) {
+			// 		logSuccess();
+			// 	} else {
+			// 		logError();
+			// 	}
+			// 	window.setTimeout(function() {
+			// 		// window.close();
+			// 	}, 1500);
+			// })
+		}
+
+	</script>
+
+</html>
