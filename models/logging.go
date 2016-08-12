@@ -8,7 +8,11 @@ import (
 	"github.com/aries-auto/envision-api"
 )
 
-func logError(v envisionAPI.Vehicle) error {
+func logError(v envisionAPI.Vehicle, err error) error {
+	errStr := ""
+	if err != nil {
+		errStr = err.Error()
+	}
 	fileName := "errors.csv"
 	f, err := os.OpenFile(fileName, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
 	if err != nil {
@@ -17,13 +21,17 @@ func logError(v envisionAPI.Vehicle) error {
 	defer f.Close()
 
 	writer := csv.NewWriter(f)
-	record := []string{strings.ToLower(strings.TrimSpace(v.ID)), strings.ToLower(strings.TrimSpace(v.Year)), strings.ToLower(strings.TrimSpace(v.Make)), strings.ToLower(strings.TrimSpace(v.Model)), strings.ToLower(strings.TrimSpace(v.BodyType))}
+	record := []string{strings.ToLower(strings.TrimSpace(v.ID)), strings.ToLower(strings.TrimSpace(v.Year)), strings.ToLower(strings.TrimSpace(v.Make)), strings.ToLower(strings.TrimSpace(v.Model)), strings.ToLower(strings.TrimSpace(v.BodyType)), errStr}
 	err = writer.Write(record)
 	writer.Flush()
 	return err
 }
 
-func logSuccess(v envisionAPI.Vehicle) error {
+func logSuccess(v envisionAPI.Vehicle, err error) error {
+	errStr := ""
+	if err != nil {
+		errStr = err.Error()
+	}
 	fileName := "success.csv"
 	f, err := os.OpenFile(fileName, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
 	if err != nil {
@@ -32,7 +40,7 @@ func logSuccess(v envisionAPI.Vehicle) error {
 	defer f.Close()
 
 	writer := csv.NewWriter(f)
-	record := []string{strings.ToLower(strings.TrimSpace(v.ID)), strings.ToLower(strings.TrimSpace(v.Year)), strings.ToLower(strings.TrimSpace(v.Make)), strings.ToLower(strings.TrimSpace(v.Model)), strings.ToLower(strings.TrimSpace(v.BodyType))}
+	record := []string{strings.ToLower(strings.TrimSpace(v.ID)), strings.ToLower(strings.TrimSpace(v.Year)), strings.ToLower(strings.TrimSpace(v.Make)), strings.ToLower(strings.TrimSpace(v.Model)), strings.ToLower(strings.TrimSpace(v.BodyType)), errStr}
 	err = writer.Write(record)
 	writer.Flush()
 	return err

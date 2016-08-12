@@ -1,6 +1,8 @@
 package models
 
 import (
+	"log"
+
 	"github.com/aries-auto/envision-api"
 )
 
@@ -13,5 +15,6 @@ func TryAllVehicles() error {
 	for _, ariesVehicle := range AriesVehicleMap {
 		vs = append(vs, ariesVehicle)
 	}
+	log.Printf("Begin testing %d vehicles", len(vs))
 	return TryAllVehiclesInHeadlessBrowser(vs)
 }
