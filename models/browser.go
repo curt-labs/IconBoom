@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/aries-auto/envision-api"
 )
@@ -61,6 +62,7 @@ func TryAllVehiclesInHeadlessBrowser(vs []envisionAPI.Vehicle) error {
 				errorMap[vehicle.ID] = vehicle
 				logError(vehicle, err)
 			}
+			time.Sleep(time.Second * 2) //make it take forever
 		}
 	}
 	return err
